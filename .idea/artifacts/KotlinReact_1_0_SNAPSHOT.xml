@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="KotlinReact-1.0-SNAPSHOT">
+    <output-path>C:\Users\Medyen\Documents\Personal\KotlinReact\build\libs</output-path>
+    <root id="archive" name="KotlinReact-1.0-SNAPSHOT.jar" />
+  </artifact>
+</component>
