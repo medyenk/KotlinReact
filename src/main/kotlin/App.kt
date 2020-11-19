@@ -1,3 +1,5 @@
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kotlinx.css.*
 import react.*
 import react.dom.*
@@ -12,14 +14,16 @@ external interface AppState : RState {
 
 class App : RComponent<RProps, AppState>() {
     override fun AppState.init() {
-        unwatchedVideos = listOf(
-                Video(1, "Building and breaking things", "John Doe", "https://youtu.be/PsaFVLr8t4E"),
-                Video(2, "The development process", "Jane Smith", "https://youtu.be/PsaFVLr8t4E"),
-                Video(3, "The Web 7.0", "Matt Miller", "https://youtu.be/PsaFVLr8t4E")
-        )
-        watchedVideos = listOf(
-                Video(4, "Mouseless development", "Tom Jerry", "https://youtu.be/PsaFVLr8t4E")
-        )
+        unwatchedVideos = listOf()
+        watchedVideos = listOf()
+
+        val mainScope = MainScope()
+        mainScope.launch {
+            val videos = fetchVideos()
+            setState {
+                unwatchedVideos = videos
+            }
+        }
     }
 
     override fun RBuilder.render() {
